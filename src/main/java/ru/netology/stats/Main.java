@@ -1,4 +1,4 @@
-package ru.netology;
+package ru.netology.stats;
 
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
