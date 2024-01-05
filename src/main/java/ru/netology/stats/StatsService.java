@@ -7,7 +7,7 @@ public class StatsService {
         for (int month = 0; month < salesPerMonth.length; month++) {
             sum += salesPerMonth[month];
         }
-        System.out.println("Сумма всех продаж за год "+ sum);
+
         return sum;
     }
 
@@ -15,21 +15,53 @@ public class StatsService {
         int numOfMonths = salesPerMonth.length;
         int averageAmount = getTotalSumSales(salesPerMonth) / numOfMonths;
 
-        System.out.println("Средняя сумма продаж за год " + averageAmount);
-
         return averageAmount;
     }
 
-    public int getMonthWithBiggestSale(int[] salesPerMonth) {
-        int bestMonth = 0;
+    public int getMonthWithMaxSale(int[] salesPerMonth) {
+        int bestSalesMonth = 0;
         for (int month = 0; month < salesPerMonth.length; month++) {
-            if (salesPerMonth[month] > salesPerMonth[bestMonth]) {
-                bestMonth = month;
+            if (salesPerMonth[month] >= salesPerMonth[bestSalesMonth]) {
+                bestSalesMonth = month;
             }
         }
-        System.out.println("Лучший месяц по продажам " + bestMonth);
 
-        return bestMonth;
+        return bestSalesMonth + 1;
+    }
+
+    public int getMonthWithMinSale(int[] salesPerMonth) {
+        int worstSalesMonth = 0;
+        for (int month = 0; month < salesPerMonth.length; month++) {
+            if (salesPerMonth[month] <= salesPerMonth[worstSalesMonth]) {
+                worstSalesMonth = month;
+            }
+        }
+
+        return worstSalesMonth + 1;
+    }
+
+    public int getMonthsBelowAverageSales(int[] salesPerMonth) {
+        int averageSalesAmount = getAverageSalesAmount(salesPerMonth);
+        int numberOfMonthsWithSalesBelowAverage = 0;
+        for (int month = 0; month < salesPerMonth.length; month++) {
+            if (salesPerMonth[month] < averageSalesAmount) {
+                numberOfMonthsWithSalesBelowAverage += 1;
+            }
+        }
+
+        return numberOfMonthsWithSalesBelowAverage;
+    }
+
+    public int getMonthsAboveAverageSales(int[] salesPerMonth) {
+        int averageSalesAmount = getAverageSalesAmount(salesPerMonth);
+        int numberOfMonthsWithSalesAboveAverage = 0;
+        for (int month = 0; month < salesPerMonth.length; month++) {
+            if (salesPerMonth[month] > averageSalesAmount) {
+                numberOfMonthsWithSalesAboveAverage += 1;
+            }
+        }
+
+        return numberOfMonthsWithSalesAboveAverage;
     }
 
 }
